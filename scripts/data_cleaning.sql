@@ -13,14 +13,14 @@ SELECT
     -- Calculate missing quantity using Total_Spent ÷ Price_Per_Unit
     CASE
         WHEN Quantity IS NULL
-        THEN Total_Spent / Price_Per_Unit
+        THEN Total_Spent / NULLIF(Price_Per_Unit,0)
         ELSE Quantity
     END AS quantity,
 
     -- Calculate missing unit price using Total_Spent ÷ Quantity
     CASE
         WHEN Price_Per_Unit IS NULL
-        THEN Total_Spent / Quantity
+        THEN Total_Spent / NULLIF(Quantity,0)
         ELSE Price_Per_Unit
     END AS price_per_unit,
 
